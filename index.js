@@ -24,4 +24,4 @@ const fi = (function() {
   }
 })()
 
-fi.libraryMethod()
+fi.libraryMethod(
