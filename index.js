@@ -63,36 +63,36 @@ const fi = (function() {
 
         return newArr
       },
-      
+
       size: function(collection) {
         return (collection instanceof Array) ? collection.length : Object.keys(collection).length
       },
-      
+
       first: function(collection, stop=false) {
         return (stop) ? collection.slice(0, stop) : collection[0]
       },
-      
+
       last: function(collection, start=false) {
         return (start) ? collection.slice(collection.length-start, collection.length) : collection[collection.length-1]
       },
-      
+
       compact: function(collection) {
         const badBad = new Set([false, null, 0, "", undefined, NaN])
         return collection.filter(el => !badBad.has(el))
       },
-      
+
       sortBy: function(collection, callback) {
         const newArr = [...collection]
         return newArr.sort(function(a, b) {
           return callback(a) - callback(b)
         })
       },
-      
+
       unpack: function(receiver, arr) {
         for (let val of arr)
           receiver.push(val)
       },
-      
+
       flatten: function(collection, shallow, newArr=[]) {
         if (!Array.isArray(collection)) return newArr.push(collection)
         if (shallow) {
@@ -105,7 +105,7 @@ const fi = (function() {
         }
         return newArr
       },
-      
+
       uniqSorted: function(collection, iteratee) {
         const sorted = [collection[0]]
         for (let idx = 1; idx < collection.length; idx++) {
@@ -114,7 +114,7 @@ const fi = (function() {
         }
         return sorted
       },
-      
+
       uniq: function(collection, sorted=false, iteratee=false) {
         if (sorted) {
           return fi.uniqSorted(collection, iteratee)
@@ -133,7 +133,7 @@ const fi = (function() {
           return Array.from(uniqVals)
         }
       },
-      
+
       keys: function(obj) {
         const keys = []
         for (let key in obj){
@@ -141,7 +141,7 @@ const fi = (function() {
         }
         return keys
       },
-      
+
       values: function(obj) {
         const values = []
         for (let key in obj){
