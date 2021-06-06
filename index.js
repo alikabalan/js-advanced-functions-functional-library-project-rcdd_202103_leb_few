@@ -4,23 +4,23 @@ const fi = (function() {
         return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'
       },
 
-      each: function(collection, iteratee) {
+      each: function(collection, iterate) {
         const newCollection = (collection instanceof Array) ? collection.slice() : Object.values(collection)
 
         for (let idx = 0; idx < newCollection.length; idx++)
-          iteratee(newCollection[idx])
+          iterate(newCollection[idx])
 
         return collection
       },
 
-      map: function(collection, iteratee) {
+      map: function(collection, iterate) {
         if (!(collection instanceof Array))
           collection = Object.values(collection)
 
         const newArr = []
 
         for (let idx = 0; idx < collection.length; idx++)
-          newArr.push(iteratee(collection[idx]))
+          newArr.push(iterate(collection[idx]))
 
         return newArr
       },
@@ -106,7 +106,7 @@ const fi = (function() {
         return newArr
       },
 
-      uniqSorted: function(collection, iteratee) {
+      uniqSorted: function(collection, iterate) {
         const sorted = [collection[0]]
         for (let idx = 1; idx < collection.length; idx++) {
           if (sorted[idx-1] !== collection[idx])
@@ -115,16 +115,16 @@ const fi = (function() {
         return sorted
       },
 
-      uniq: function(collection, sorted=false, iteratee=false) {
+      uniq: function(collection, sorted=false, iterate=false) {
         if (sorted) {
-          return fi.uniqSorted(collection, iteratee)
+          return fi.uniqSorted(collection, iterate)
         } else if (!iteratee) {
           return Array.from(new Set(collection))
         } else {
           const modifiedVals = new Set()
           const uniqVals = new Set()
           for (let val of collection) {
-            const moddedVal = iteratee(val)
+            const moddedVal = iterate(val)
             if (!modifiedVals.has(moddedVal)) {
               modifiedVals.add(moddedVal)
               uniqVals.add(val)
